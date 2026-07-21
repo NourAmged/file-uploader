@@ -4,6 +4,10 @@
   margin: 0;
 }
 
+.nav-bar h1 {
+  cursor: pointer;
+}
+
 .nav-bar {
   display: flex;
   padding: 1rem;
@@ -19,10 +23,59 @@
   gap: 12px;
 }
 
-.sign-btn, .login-btn {
+.sign-btn,
+.login-btn {
   padding: 3px 12px;
   border: none;
   cursor: pointer;
   border-radius: 3px;
 }
 
+.login-form,
+.register-form {
+  display: flex;
+  margin: auto;
+  margin-top: 2rem;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid lightgrey;
+  width: 450px;
+  border-radius: 5px;
+  padding: 1.5rem 1rem 1rem 1rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.logging-fields-container,
+.register-fields-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 2rem 0 4rem 0;
+  width: 100%;
+}
+
+.logging-fields-container input,
+.register-fields-container input {
+  padding: 3px 5px;
+}
+
+.logging-fields-container div,
+.register-fields-container div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.submit-login,
+.submit-register {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.error-list {
+  color: red;
+  width: 100%;
+  list-style-type: none;
+}

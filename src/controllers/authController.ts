@@ -4,4 +4,8 @@ function loginPage(req: Request, res: Response, next: NextFunction) {
   res.render("login");
 }
 
-export { loginPage };
+function registerPage(req: Request, res: Response, next: NextFunction) {
+  res.render("register");
+}
+
+export { loginPage, registerPage };

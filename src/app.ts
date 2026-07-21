@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 
 import express from "express";
 import { indexRouter } from "./routes/indexRouter.js";
-import { loginRouter } from "./routes/authRouter.js";
+import { loginRouter, registerRouter } from "./routes/authRouter.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,9 +18,10 @@ app.set("view engine", "ejs");
 
 app.use(express.static(path.join(__dirname, "./public")));
 
-app.get("/", loginRouter);
+app.use("/", indexRouter);
 
-app.get("/", indexRouter);
+app.use("/login", loginRouter);
+app.use("/sign-up", registerRouter);
 
 app.listen(PORT, () => {
   console.log(`app is running on PORT ${PORT}`);
