@@ -1,5 +1,5 @@
-require("dotenv").config();
-const path = require("node:path");
+import("dotenv/config");
+import path from "node:path";
 
 import express from "express";
 import { indexRouter } from "./routes/indexRouter";
