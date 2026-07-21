@@ -1,4 +1,28 @@
 * {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding: 0;
   margin: 0;
 }
+
+.nav-bar {
+  display: flex;
+  padding: 1rem;
+  align-content: center;
+  justify-content: space-between;
+  border-bottom: 2px solid black;
+}
+
+.nav-bar div {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  gap: 12px;
+}
+
+.sign-btn, .login-btn {
+  padding: 3px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
