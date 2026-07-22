@@ -4,4 +4,12 @@ function homepage(req: Request, res: Response, next: NextFunction) {
   res.render("homepage");
 }
 
-export { homepage };
+function loginPage(req: Request, res: Response, next: NextFunction) {
+  res.render("login");
+}
+
+function registerPage(req: Request, res: Response, next: NextFunction) {
+  res.render("register");
+}
+
+export { homepage, loginPage, registerPage };

@@ -1,11 +1,18 @@
+import { validationResult, matchedData } from "express-validator";
 import { Request, Response, NextFunction } from "express";
 
-function loginPage(req: Request, res: Response, next: NextFunction) {
-  res.render("login");
+// import passport from "../config/passport.js";
+function addUser(req: Request, res: Response, next: NextFunction) {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).render("register", {
+      errors: errors.array(),
+    });
+  }
+
+  const data = matchedData(req);
+
 }
 
-function registerPage(req: Request, res: Response, next: NextFunction) {
-  res.render("register");
-}
-
-export { loginPage, registerPage };
+export { addUser };
