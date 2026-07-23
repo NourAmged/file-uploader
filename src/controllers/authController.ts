@@ -12,7 +12,18 @@ function addUser(req: Request, res: Response, next: NextFunction) {
   }
 
   const data = matchedData(req);
-
 }
 
-export { addUser };
+function loginUser(req: Request, res: Response, next: NextFunction) {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).render("login", {
+      errors: errors.array(),
+    });
+  }
+
+  const data = matchedData(req);
+}
+
+export { addUser, loginUser };

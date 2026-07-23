@@ -11,7 +11,7 @@ const validateUserRegister = [
     ),
 
   body("password")
-    .trim() 
+    .trim()
     .isLength({ min: 8 })
     .withMessage("Password should at least 8 characters long"),
 
@@ -26,6 +26,7 @@ const validateUserLogin = [
   body("username")
     .trim()
     .isLength({ min: 3, max: 12 })
+    .withMessage("Incorrect username")
     .isAlphanumeric()
     .withMessage("Incorrect username"),
 
