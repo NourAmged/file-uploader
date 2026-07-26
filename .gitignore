@@ -2,6 +2,4 @@ tsconfig.tsbuildinfo
 dist/
 node_modules
 .env
-/generated/prisma
-
-/generated/prisma
+prisma/generated
