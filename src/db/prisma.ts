@@ -1,9 +1,8 @@
 import "dotenv/config";
 
-import expressSession from "express-session";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../../prisma/generated/prisma/client.js";
-import { PrismaSessionStore } from "@quixo3/prisma-session-store";
+
 
 const connectionString = `${process.env.DATABASE_URL}`;
 

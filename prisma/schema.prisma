@@ -19,7 +19,8 @@ model User {
 }
 
 model Session {
-  id       String   @id
-  sid      String   @unique
-  expireAt DateTime
+  id        String   @id
+  sid       String   @unique
+  data      String  
+  expiresAt DateTime
 }

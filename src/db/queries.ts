@@ -17,4 +17,22 @@ async function registerUser(user: Record<string, any>) {
   }
 }
 
-export { registerUser };
+async function getUserByUsername(username: string) {
+  //TODO return type
+  const user = await prisma.user.findUnique({
+    where: { username: username },
+  });
+
+  return user;
+}
+
+async function getUserById(id: number) {
+  //TODO return type
+  const user = await prisma.user.findUnique({
+    where: { id: id },
+  });
+
+  return user;
+}
+
+export { registerUser, getUserByUsername, getUserById };

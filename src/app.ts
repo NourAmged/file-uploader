@@ -2,9 +2,13 @@ import "dotenv/config";
 import path from "node:path";
 import { fileURLToPath } from "url";
 
+import { PrismaSessionStore } from "@quixo3/prisma-session-store";
+import expressSession from "express-session";
 import express from "express";
 import { indexRouter } from "./routes/indexRouter.js";
 import { loginRouter, registerRouter } from "./routes/authRouter.js";
+import { prisma } from "./db/prisma.js";
+import passport from "passport";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,6 +24,22 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 app.use(express.urlencoded({ extended: false }));
 
+app.use(
+  expressSession({
+    cookie: {
+      maxAge: 24 * 60 * 60 * 1000,
+    },
+    secret: "lost cat in sea",
+    resave: true,
+    saveUninitialized: true,
+    store: new PrismaSessionStore(prisma, {
+      checkPeriod: 2 * 60 * 1000,
+      dbRecordIdIsSessionId: true,
+    }),
+  }),
+);
+
+app.use(passport.session());
 
 app.use("/", indexRouter);
 

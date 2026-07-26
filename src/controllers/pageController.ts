@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
 function homepage(req: Request, res: Response, next: NextFunction) {
-  res.render("homepage");
+  res.render("homepage", { user: req.user });
 }
 
 function loginPage(req: Request, res: Response, next: NextFunction) {
