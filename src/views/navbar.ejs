@@ -1,7 +1,13 @@
 <nav class="nav-bar">
   <h1 onclick="window.location.href='/'">Storage</h1>
+  <%if(!locals.user){%>
   <div>
     <button class="login-btn" onclick="window.location.href='./login'">Login</button>
     <button class="sign-btn" onclick="window.location.href='./sign-up'">Sign Up</button>
   </div>
+  <%} else {%>
+  <div>
+    <button class="logout-btn" onclick="window.location.href='./logout'">Logout</button>
+  </div>
+  <%}%>
 </nav>

@@ -35,8 +35,6 @@ function loginUser(req: Request, res: Response, next: NextFunction) {
     });
   }
 
-  // const data = matchedData(req);
-
   passport.authenticate(
     "local",
     (err: Error, user: Express.User, info: IVerifyOptions) => {
@@ -55,4 +53,41 @@ function loginUser(req: Request, res: Response, next: NextFunction) {
   )(req, res, next);
 }
 
-export { addUser, loginUser };
+async function logoutUser(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> {
+  req.logout((err: Error) => {
+    if (err) {
+      next(err);
+    }
+    res.redirect("/");
+  });
+}
+
+async function isLoggedIn(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> {
+  if (req.isAuthenticated()) {
+    next();
+    return;
+  }
+  res.redirect("/login");
+}
+
+async function isLoggedOut(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> {
+  if (!req.isAuthenticated()) {
+    next();
+    return;
+  }
+  res.redirect("/");
+}
+
+export { addUser, loginUser, isLoggedIn, isLoggedOut, logoutUser };

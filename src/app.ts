@@ -6,7 +6,11 @@ import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import expressSession from "express-session";
 import express from "express";
 import { indexRouter } from "./routes/indexRouter.js";
-import { loginRouter, registerRouter } from "./routes/authRouter.js";
+import {
+  loginRouter,
+  registerRouter,
+  logoutRouter,
+} from "./routes/authRouter.js";
 import { prisma } from "./db/prisma.js";
 import passport from "passport";
 
@@ -45,6 +49,7 @@ app.use("/", indexRouter);
 
 app.use("/login", loginRouter);
 app.use("/sign-up", registerRouter);
+app.use("/logout", logoutRouter);
 
 app.listen(PORT, () => {
   console.log(`app is running on PORT ${PORT}`);

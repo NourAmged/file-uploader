@@ -9,10 +9,9 @@
 </head>
 
 <body>
-  <%-include("navbar")%>
-  <h1>Hello World</h1>
+  <%-include("navbar", locals.user)%>
   <%if(locals.user){%>
-  <h1>Hello<%= user.username%></h1>
+    
   <%}%>
 </body>
 

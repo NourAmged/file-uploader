@@ -1,6 +1,12 @@
 import { Router } from "express";
 import { loginPage, registerPage } from "../controllers/pageController.js";
-import { addUser, loginUser } from "../controllers/authController.js";
+import {
+  addUser,
+  loginUser,
+  isLoggedOut,
+  isLoggedIn,
+  logoutUser,
+} from "../controllers/authController.js";
 import {
   validateUserRegister,
   validateUserLogin,
@@ -8,11 +14,13 @@ import {
 
 const loginRouter = Router();
 const registerRouter = Router();
+const logoutRouter = Router();
 
-loginRouter.get("/", loginPage);
-registerRouter.get("/", registerPage);
+loginRouter.get("/", isLoggedOut, loginPage);
+registerRouter.get("/", isLoggedOut, registerPage);
+logoutRouter.get("/", isLoggedIn, logoutUser);
 
 registerRouter.post("/", validateUserRegister, addUser);
 loginRouter.post("/", validateUserLogin, loginUser);
 
-export { loginRouter, registerRouter };
+export { loginRouter, registerRouter, logoutRouter };
