@@ -80,3 +80,21 @@
   width: 100%;
   list-style-type: none;
 }
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 1rem;
+  height: 89vh;
+  width: max(250px, 15%);
+  border-right: 2px solid gray;
+}
+
+.create-btn {
+  padding: 5px 12px;
+  font-size: 1.2em;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+}

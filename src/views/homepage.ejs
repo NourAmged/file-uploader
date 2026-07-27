@@ -11,7 +11,10 @@
 <body>
   <%-include("navbar", locals.user)%>
   <%if(locals.user){%>
-    
+    <div class="sidebar">
+        <button class="create-btn">New</button>
+        <p class="shared">Shared links</p>
+    </div>
   <%}%>
 </body>
 
