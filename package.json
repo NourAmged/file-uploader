@@ -19,6 +19,7 @@
     "@types/express": "^5.0.6",
     "@types/express-session": "^1.19.0",
     "@types/express-validator": "^2.20.33",
+    "@types/multer": "^2.2.0",
     "@types/node": "^26.1.1",
     "@types/passport": "^1.0.17",
     "@types/passport-local": "^1.0.38",
@@ -37,6 +38,7 @@
     "express": "^5.2.1",
     "express-session": "^1.19.0",
     "express-validator": "^7.3.2",
+    "multer": "^2.2.0",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "pg": "^8.22.0"

@@ -98,3 +98,23 @@
   border-radius: 5px;
   border: none;
 }
+
+.create-menu {
+  flex-direction: column;
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 220px;
+  height: 120px;
+  z-index: 999;
+  position: absolute;
+  top: 150px;
+  background-color: white;
+}
+
+.upload-file {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px;
+  cursor: pointer;
+}

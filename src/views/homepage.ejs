@@ -11,10 +11,17 @@
 <body>
   <%-include("navbar", locals.user)%>
   <%if(locals.user){%>
-    <div class="sidebar">
-        <button class="create-btn">New</button>
-        <p class="shared">Shared links</p>
-    </div>
+  <div class="sidebar">
+    <button class="create-btn" onclick="document.querySelector('.create-menu').style.display = document.querySelector('.create-menu').style.display == 'none' ? 'flex' : 'none'">New</button>
+    <form method="POST" action="/upload-file" class="create-menu" style="display: none;" enctype="multipart/form-data">
+      <div class="upload-file">
+        <input type="file" id="file" name="file" required />
+        <button type="submit">Upload File</button>
+      </div>
+    </form>
+    <p class="shared">Shared links</p>
+  </div>
+  </div>
   <%}%>
 </body>
 
