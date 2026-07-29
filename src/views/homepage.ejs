@@ -12,17 +12,32 @@
   <%-include("navbar", locals.user)%>
   <%if(locals.user){%>
   <div class="sidebar">
-    <button class="create-btn" onclick="document.querySelector('.create-menu').style.display = document.querySelector('.create-menu').style.display == 'none' ? 'flex' : 'none'">New</button>
+    <button class="create-btn">New</button>
     <form method="POST" action="/upload-file" class="create-menu" style="display: none;" enctype="multipart/form-data">
       <div class="upload-file">
         <input type="file" id="file" name="file" required />
         <button type="submit">Upload File</button>
+        <% if (locals.errors) { %>
+        <ul class="error-list" style="padding:1rem">
+          <% locals.errors.forEach(function(error) { %>
+          <li><%= error.msg %></li>
+          <% }); %>
+        </ul>
+        <% } %>
       </div>
     </form>
     <p class="shared">Shared links</p>
   </div>
+  <%if(locals.files) {%>
+  <div class="files">
+    <h1>Files</h1>
+    <%locals.files.forEach(file => {%>
+    <p><%=file.file_name%></p>
+    <%});%>
   </div>
   <%}%>
+  <%}%>
+  <script src="/js/sidebar.js"></script>
 </body>
 
 </html>

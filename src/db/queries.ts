@@ -1,3 +1,4 @@
+import { Request } from "express";
 import { prisma } from "./prisma.js";
 import bcrypt from "bcryptjs";
 
@@ -35,4 +36,26 @@ async function getUserById(id: number) {
   return user;
 }
 
-export { registerUser, getUserByUsername, getUserById };
+async function addFile(userId: number, file: any) {
+  try {
+    await prisma.files.create({
+      data: {
+        file_name: file.originalname,
+        file_path: file.path,
+        userId: userId,
+      },
+    });
+  } catch (err: any) {
+    throw err;
+  }
+}
+
+async function getFilesById(userId: number) {
+  const files = await prisma.files.findMany({
+    where: { userId: userId },
+  });
+
+  return files;
+}
+
+export { registerUser, getUserByUsername, getUserById, addFile, getFilesById };

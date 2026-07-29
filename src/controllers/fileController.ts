@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import { addFile } from "../db/queries.js";
 import multer from "multer";
 
 const storage = multer.diskStorage({
@@ -13,9 +14,19 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-function uploadFile(req: Request, res: Response, next: NextFunction) {
-  console.log(req.file);
-  res.redirect("/");
+async function uploadFile(req: Request, res: Response, next: NextFunction) {
+  try {
+    const user = req.user as { id: number };
+    const userId = user.id;
+
+    await addFile(userId, req.file);
+
+    res.redirect("/");
+  } catch (error: any) {
+    return res.status(400).render("homepage", {
+      errors: [{ msg: error.message }],
+    });
+  }
 }
 
 export { uploadFile, upload };
