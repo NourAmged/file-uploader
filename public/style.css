@@ -118,3 +118,39 @@
   padding: 8px;
   cursor: pointer;
 }
+
+main {
+  display: flex;
+}
+
+.main-content-container {
+  width: 100%;
+  padding: 1rem;
+}
+
+.welcome-txt {
+  text-align: center;
+}
+
+.files {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 18px;
+  gap: 22px;
+}
+
+.file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 1.2em;
+  width: 200px;
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding: 10px 0 10px 10px;
+}
+
+.dots {
+  width: 28px;
+  cursor: pointer;
+}
