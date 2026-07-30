@@ -39,7 +39,7 @@
           <p><%=file.file_name%></p>
           <img class="file-btn" src="/dots.svg" alt="dots" />
           <div id="<%=idx%>" class="download-menu" style="display: none;">
-            <p class="download-btn">Download</p>
+            <p onclick="window.location.href='/file/<%=file.id%>'" class="download-btn">Download</p>
             <p class="delete-btn">Delete</p>
           </div>
         </div>

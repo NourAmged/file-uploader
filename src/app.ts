@@ -55,6 +55,7 @@ app.use("/sign-up", registerRouter);
 app.use("/logout", logoutRouter);
 
 app.use("/upload-file", fileRouter);
+app.use("/file/:fileId", fileRouter);
 
 app.listen(PORT, () => {
   console.log(`app is running on PORT ${PORT}`);

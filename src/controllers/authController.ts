@@ -1,6 +1,6 @@
 import { validationResult, matchedData } from "express-validator";
 import { Request, Response, NextFunction } from "express";
-import { registerUser } from "../db/queries.js";
+import { registerUser, getUserByFileId } from "../db/queries.js";
 import { IVerifyOptions } from "passport-local";
 
 import { passport } from "../config/passport.js";
@@ -60,9 +60,9 @@ async function logoutUser(
 ): Promise<void> {
   req.logout((err: Error) => {
     if (err) {
-      next(err);
+      return next(err);
     }
-    res.redirect("/");
+    return res.redirect("/");
   });
 }
 
@@ -72,10 +72,9 @@ async function isLoggedIn(
   next: NextFunction,
 ): Promise<void> {
   if (req.isAuthenticated()) {
-    next();
-    return;
+    return next();
   }
-  res.redirect("/login");
+  return res.redirect("/login");
 }
 
 async function isLoggedOut(
@@ -84,10 +83,31 @@ async function isLoggedOut(
   next: NextFunction,
 ): Promise<void> {
   if (!req.isAuthenticated()) {
-    next();
-    return;
+    return next();
   }
-  res.redirect("/");
+  return res.redirect("/");
 }
 
-export { addUser, loginUser, isLoggedIn, isLoggedOut, logoutUser };
+async function isAuthorized(req: Request, res: Response, next: NextFunction) {
+  const fileId = Number(req.params.fileId);
+
+  const currentUser = req.user as { id: number };
+
+  const userId = await getUserByFileId(fileId);
+
+  const currentUserId = currentUser.id;
+
+  if (currentUserId === userId?.userId) {
+    return next();
+  }
+  return res.redirect("/");
+}
+
+export {
+  addUser,
+  loginUser,
+  isLoggedIn,
+  isLoggedOut,
+  logoutUser,
+  isAuthorized,
+};

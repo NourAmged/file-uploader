@@ -58,4 +58,30 @@ async function getFilesById(userId: number) {
   return files;
 }
 
-export { registerUser, getUserByUsername, getUserById, addFile, getFilesById };
+async function getFilePathById(fileId: number) {
+  const filePath = await prisma.files.findUnique({
+    where: { id: fileId },
+    select: { file_path: true },
+  });
+
+  return filePath;
+}
+
+async function getUserByFileId(fileId: number) {
+  const userId = await prisma.files.findUnique({
+    where: { id: fileId },
+    select: { userId: true },
+  });
+
+  return userId;
+}
+
+export {
+  registerUser,
+  getUserByUsername,
+  getUserById,
+  addFile,
+  getFilesById,
+  getUserByFileId,
+  getFilePathById,
+};

@@ -7,15 +7,15 @@ async function homepage(req: Request, res: Response, next: NextFunction) {
 
   const files = await getFilesById(userId);
 
-  res.render("homepage", { user: req.user, files: files });
+  return res.render("homepage", { user: req.user, files: files });
 }
 
 function loginPage(req: Request, res: Response, next: NextFunction) {
-  res.render("login");
+  return res.render("login");
 }
 
 function registerPage(req: Request, res: Response, next: NextFunction) {
-  res.render("register");
+  return res.render("register");
 }
 
 export { homepage, loginPage, registerPage };
