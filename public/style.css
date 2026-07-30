@@ -99,11 +99,12 @@
   border: none;
 }
 
-.create-menu {
+.create-menu,
+.download-menu {
   flex-direction: column;
   border: 2px solid black;
   border-radius: 5px;
-  width: 220px;
+  width: 180px;
   height: 120px;
   z-index: 999;
   position: absolute;
@@ -143,6 +144,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
   font-family: 1.2em;
   width: 200px;
   border: 2px solid grey;
@@ -150,7 +152,33 @@ main {
   padding: 10px 0 10px 10px;
 }
 
-.dots {
+.file-btn {
   width: 28px;
   cursor: pointer;
+}
+
+.download-menu {
+  width: 120px;
+  height: 120px;
+  top: 2.2rem;
+  right: 1.2rem;
+}
+
+.download-btn,
+.delete-btn {
+  padding: 10px 0 10px 10px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  border-top: 1px solid black;
+  color: red;
+}
+
+.delete-btn:hover {
+  background-color: lightcoral;
+}
+
+.download-btn:hover {
+  background-color: lightgrey;
 }
