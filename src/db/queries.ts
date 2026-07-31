@@ -76,6 +76,14 @@ async function getUserByFileId(fileId: number) {
   return userId;
 }
 
+async function deleteFileById(fileId: number): Promise<void> {
+  await prisma.files.delete({
+    where: {
+      id: fileId,
+    },
+  });
+}
+
 export {
   registerUser,
   getUserByUsername,
@@ -84,4 +92,5 @@ export {
   getFilesById,
   getUserByFileId,
   getFilePathById,
+  deleteFileById
 };

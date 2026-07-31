@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { addFile, getFilePathById } from "../db/queries.js";
+import { addFile, deleteFileById, getFilePathById } from "../db/queries.js";
 import multer from "multer";
 
 const storage = multer.diskStorage({
@@ -44,4 +44,16 @@ async function downloadFile(req: Request, res: Response, next: NextFunction) {
   });
 }
 
-export { uploadFile, upload, downloadFile };
+async function deleteFile(req: Request, res: Response, next: NextFunction) {
+  const fileId = Number(req.params.fileId);
+  const filePath = await getFilePathById(fileId);
+
+  if (!filePath) {
+    return res.status(404).send("File not found");
+  }
+
+  await deleteFileById(fileId);
+  return next();
+}
+
+export { uploadFile, upload, downloadFile, deleteFile };
