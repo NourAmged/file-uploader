@@ -21,7 +21,8 @@ async function uploadFile(req: Request, res: Response, next: NextFunction) {
     const user = req.user as { id: number };
     const userId = user.id;
 
-    await addFile(userId, req.file);
+
+    await addFile(userId, req.file!);
 
     return res.redirect("/");
   } catch (error: any) {

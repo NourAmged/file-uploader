@@ -25,20 +25,25 @@ model Files {
   file_path  String   @unique
   size       Int
   type       String
-  created_at DateTime
-  user       User     @relation(fields: [userId], references: [id])
-  userId     Int
-  folderId   Int
+  created_at DateTime @default(now())
 
-  folder Folders @relation(fields: [folderId], references: [id])
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  folderId Int?
+  folder   Folders? @relation(fields: [folderId], references: [id])
 }
 
 model Folders {
-  id          Int     @id @default(autoincrement())
-  folder_name String  @unique
-  parent_id   Int
-  fileId      Int
-  files       Files[]
+  id          Int    @id @default(autoincrement())
+  folder_name String
+
+  files Files[]
+
+  // Self relation
+  parentId Int?
+  parent   Folders?  @relation("FolderHierarchy", fields: [parentId], references: [id])
+  children Folders[] @relation("FolderHierarchy")
 }
 
 model Session {

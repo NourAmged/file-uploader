@@ -36,18 +36,23 @@ async function getUserById(id: number) {
   return user;
 }
 
-async function addFile(userId: number, file: any) {
-  try {
-    await prisma.files.create({
-      data: {
-        file_name: file.originalname,
-        file_path: file.path,
-        userId: userId,
-      },
-    });
-  } catch (err: any) {
-    throw err;
-  }
+async function addFile(
+  userId: number,
+  file: Express.Multer.File,
+  folderId: number | null = null,
+) {
+
+  await prisma.files.create({
+    data: {
+      file_name: file.originalname,
+      file_path: file.path,
+      type: file.mimetype,
+      size: file.size,
+      folderId: folderId,
+      userId: userId,
+    },
+  });
+
 }
 
 async function getFilesById(userId: number) {
@@ -92,5 +97,5 @@ export {
   getFilesById,
   getUserByFileId,
   getFilePathById,
-  deleteFileById
+  deleteFileById,
 };
