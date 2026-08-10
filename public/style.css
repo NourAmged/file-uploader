@@ -112,7 +112,8 @@
   background-color: white;
 }
 
-.upload-file {
+.upload-file,
+.create-folder {
   display: flex;
   flex-direction: column;
   gap: 3px;
