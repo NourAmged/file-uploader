@@ -15,7 +15,7 @@
     <div class="sidebar">
       <button class="create-btn">New</button>
       <div class="create-menu" style="display: none;">
-        <form method="POST" action="/create-folder" >
+        <form method="POST" action="/create-folder">
           <div class="create-folder">
             <input type="text" name="folder-name" id="folder-name" required placeholder="Folder Name">
             <button type="submit">Create Folder</button>
@@ -45,22 +45,43 @@
       </div>
       <p class="shared">Shared links</p>
     </div>
-    <%if(locals.files) {%>
-    <div class="main-content-container">
+    <div class="container">
       <h1 class="welcome-txt">Welcome to Storage</h1>
-      <h1>Files</h1>
-      <div class="files">
-        <%locals.files.forEach((file,idx) => {%>
-        <div class="file">
-          <p><%=file.file_name%></p>
-          <img class="file-btn" src="/dots.svg" alt="dots" />
-          <div id="<%=idx%>" class="download-menu" style="display: none;">
-            <p onclick="window.location.href='/file/<%=file.id%>'" class="download-btn">Download</p>
-            <p onclick="window.location.href='/file/<%=file.id%>/delete'" class="delete-btn">Delete</p>
+      <%if(locals.folders) {%>
+      <div class="main-content-container">
+        <h1>Folders</h1>
+        <div class="folders">
+          <%locals.folders.forEach((folder,idx) => {%>
+          <div class="folder">
+            <p><%=folder.folder_name%></p>
+            <img class="file-btn" src="/dots.svg" alt="dots" />
+            <div id="<%=idx%>" class="download-menu" style="display: none;">
+              <p onclick="window.location.href='/folder/<%=folder.id%>'" class="download-btn">Download</p>
+              <p onclick="window.location.href='/folder/<%=folder.id%>/delete'" class="delete-btn">Delete</p>
+            </div>
           </div>
+          <%});%>
         </div>
-        <%});%>
       </div>
+      <%}%>
+  
+      <%if(locals.files) {%>
+      <div class="main-content-container">
+        <h1>Files</h1>
+        <div class="files">
+          <%locals.files.forEach((file,idx) => {%>
+          <div class="file">
+            <p><%=file.file_name%></p>
+            <img class="file-btn" src="/dots.svg" alt="dots" />
+            <div id="<%=idx%>" class="download-menu" style="display: none;">
+              <p onclick="window.location.href='/file/<%=file.id%>'" class="download-btn">Download</p>
+              <p onclick="window.location.href='/file/<%=file.id%>/delete'" class="delete-btn">Delete</p>
+            </div>
+          </div>
+          <%});%>
+        </div>
+      </div>
+
     </div>
     <%}%>
     <%}%>

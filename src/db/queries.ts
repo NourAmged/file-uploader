@@ -75,6 +75,14 @@ async function getFilesById(userId: number) {
   return files;
 }
 
+async function getFolderById(userId: number) {
+  const folders = await prisma.folders.findMany({
+    where: { userId: userId },
+  });
+
+  return folders;
+}
+
 async function getFilePathById(fileId: number) {
   const filePath = await prisma.files.findUnique({
     where: { id: fileId },
@@ -111,4 +119,5 @@ export {
   getFilePathById,
   deleteFileById,
   addFolder,
+  getFolderById,
 };
