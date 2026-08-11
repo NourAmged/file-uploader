@@ -40,8 +40,7 @@ async function addFile(
   userId: number,
   file: Express.Multer.File,
   folderId: number | null = null,
-) {
-
+): Promise<void> {
   await prisma.files.create({
     data: {
       file_name: file.originalname,
@@ -52,7 +51,20 @@ async function addFile(
       userId: userId,
     },
   });
+}
 
+async function addFolder(
+  userId: number,
+  folderName: string,
+  parentId: number | null,
+): Promise<void> {
+  await prisma.folders.create({
+    data: {
+      folder_name: folderName,
+      userId: userId,
+      parentId: parentId,
+    },
+  });
 }
 
 async function getFilesById(userId: number) {
@@ -98,4 +110,5 @@ export {
   getUserByFileId,
   getFilePathById,
   deleteFileById,
+  addFolder,
 };

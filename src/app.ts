@@ -12,6 +12,8 @@ import {
   logoutRouter,
 } from "./routes/authRouter.js";
 
+import { folderRouter } from "./routes/folderRouter.js";
+
 import { fileRouter } from "./routes/fileRouter.js";
 
 import { prisma } from "./db/prisma.js";
@@ -55,8 +57,11 @@ app.use("/sign-up", registerRouter);
 app.use("/logout", logoutRouter);
 
 app.use("/upload-file", fileRouter);
+app.use("/create-folder", folderRouter);
+
 app.use("/file/:fileId/", fileRouter);
 app.use("/file/:fileId", fileRouter);
+
 
 app.listen(PORT, () => {
   console.log(`app is running on PORT ${PORT}`);
