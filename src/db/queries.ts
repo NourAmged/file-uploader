@@ -67,17 +67,19 @@ async function addFolder(
   });
 }
 
-async function getFilesById(userId: number) {
+async function getFilesById(userId: number, folderId: number | null) {
   const files = await prisma.files.findMany({
-    where: { userId: userId },
+    where: {
+      AND: [{ userId: userId }, { folderId: folderId }],
+    },
   });
 
   return files;
 }
 
-async function getFolderById(userId: number) {
+async function getFolderById(userId: number, folderId: number | null) {
   const folders = await prisma.folders.findMany({
-    where: { userId: userId },
+    where: { AND: [{ userId: userId }, { parentId: folderId }] },
   });
 
   return folders;

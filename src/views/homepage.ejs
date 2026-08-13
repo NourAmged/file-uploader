@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/style.css">
   <title>File Uploader</title>
 </head>
 
@@ -52,11 +52,11 @@
         <h1>Folders</h1>
         <div class="folders">
           <%locals.folders.forEach((folder,idx) => {%>
-          <div class="folder">
+          <div class="folder" onclick="window.location.href='/folder/<%=folder.id%>'">
             <p><%=folder.folder_name%></p>
-            <img class="file-btn" src="/dots.svg" alt="dots" />
+            <img class="folder-btn" src="/dots.svg" alt="dots" />
             <div id="<%=idx%>" class="download-menu" style="display: none;">
-              <p onclick="window.location.href='/folder/<%=folder.id%>'" class="download-btn">Download</p>
+              <p class="download-btn">Download</p>
               <p onclick="window.location.href='/folder/<%=folder.id%>/delete'" class="delete-btn">Delete</p>
             </div>
           </div>
@@ -87,7 +87,7 @@
     <%}%>
   </main>
   <script src="/js/sidebar.js"></script>
-  <script src="/js/fileMenu.js"></script>
+  <script src="/js/fileFolderMenu.js"></script>
 </body>
 
 </html>
