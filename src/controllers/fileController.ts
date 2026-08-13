@@ -17,6 +17,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 async function uploadFile(req: Request, res: Response, next: NextFunction) {
+  console.log(req.originalUrl);
   try {
     const user = req.user as { id: number };
     const userId = user.id;
