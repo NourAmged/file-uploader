@@ -13,6 +13,7 @@ async function homepage(req: Request, res: Response, next: NextFunction) {
     user: req.user,
     files: files,
     folders: folders,
+    folderId: folderId,
   });
 }
 

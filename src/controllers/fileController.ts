@@ -17,14 +17,15 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 async function uploadFile(req: Request, res: Response, next: NextFunction) {
-  console.log(req.originalUrl);
   try {
     const user = req.user as { id: number };
     const userId = user.id;
+    const folderId = Number(req.params.folderId);
 
-
-    await addFile(userId, req.file!);
-
+    await addFile(userId, req.file!, folderId);
+    
+    if(folderId)
+      return res.redirect(`/folder/${folderId}`);
     return res.redirect("/");
   } catch (error: any) {
     return res.status(400).render("homepage", {

@@ -56,6 +56,9 @@ app.use("/sign-up", registerRouter);
 app.use("/logout", logoutRouter);
 
 app.use("/upload-file", fileRouter);
+
+app.use("/folder/upload-file/",fileRouter);
+
 app.use("/create-folder", folderRouter);
 
 app.use("/file/:fileId/", fileRouter);

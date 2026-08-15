@@ -29,7 +29,7 @@
           </div>
         </form>
 
-        <form method="POST" action="/upload-file" enctype="multipart/form-data">
+        <form method="POST" action=<%= (locals.folderId) ? `upload-file/${folderId}` : "/upload-file"%> enctype="multipart/form-data">
           <div class="upload-file">
             <input type="file" id="file" name="file" required />
             <button type="submit">Upload File</button>
