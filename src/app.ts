@@ -54,10 +54,14 @@ app.use("/login", loginRouter);
 app.use("/sign-up", registerRouter);
 app.use("/logout", logoutRouter);
 
+app.use("/", indexRouter);
+app.use("/folder/", indexRouter);
+
 app.use("/upload-file", fileRouter);
 app.use("/folder/upload-file/", fileRouter);
 
 app.use("/create-folder", folderRouter);
+app.use("/folder/:folderId/", folderRouter);
 
 //download file
 app.use("/file/", fileRouter);
@@ -65,9 +69,6 @@ app.use("/file/", fileRouter);
 app.use("/folder/", fileRouter);
 //for deletion
 app.use("/file/:fileId", fileRouter);
-
-app.use("/", indexRouter);
-app.use("/folder/", indexRouter);
 
 app.listen(PORT, () => {
   console.log(`app is running on PORT ${PORT}`);
