@@ -50,19 +50,19 @@ app.use(
 
 app.use(passport.session());
 
-
 app.use("/login", loginRouter);
 app.use("/sign-up", registerRouter);
 app.use("/logout", logoutRouter);
 
 app.use("/upload-file", fileRouter);
-
-app.use("/folder/upload-file/",fileRouter);
+app.use("/folder/upload-file/", fileRouter);
 
 app.use("/create-folder", folderRouter);
 
-app.use("/file/:fileId/", fileRouter);
-
+//download file
+app.use("/file/", fileRouter);
+//download file from folder
+app.use("/folder/", fileRouter);
 //for deletion
 app.use("/file/:fileId", fileRouter);
 

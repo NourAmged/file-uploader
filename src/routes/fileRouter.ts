@@ -12,7 +12,8 @@ const fileRouter = Router({ mergeParams: true });
 fileRouter.post("/", isLoggedIn, upload.single("file"), uploadFile);
 fileRouter.post("/:folderId", isLoggedIn, upload.single("file"), uploadFile);
 
-fileRouter.get("/", isLoggedIn, isAuthorized, downloadFile);
+fileRouter.get("/:fileId/", isLoggedIn, isAuthorized, downloadFile);
+fileRouter.get("/:folderId/file/:fileId", isLoggedIn, isAuthorized, downloadFile);
 fileRouter.get("/delete", isLoggedIn, isAuthorized, deleteFile);
 
 export { fileRouter };

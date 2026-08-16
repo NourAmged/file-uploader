@@ -23,9 +23,8 @@ async function uploadFile(req: Request, res: Response, next: NextFunction) {
     const folderId = Number(req.params.folderId);
 
     await addFile(userId, req.file!, folderId);
-    
-    if(folderId)
-      return res.redirect(`/folder/${folderId}`);
+
+    if (folderId) return res.redirect(`/folder/${folderId}`);
     return res.redirect("/");
   } catch (error: any) {
     return res.status(400).render("homepage", {
@@ -36,7 +35,9 @@ async function uploadFile(req: Request, res: Response, next: NextFunction) {
 
 async function downloadFile(req: Request, res: Response, next: NextFunction) {
   const fileId = Number(req.params.fileId);
-  const filePath = await getFilePathById(fileId);
+  const folderId = Number(req.params.folderId);
+
+  const filePath = await getFilePathById(fileId, folderId);
 
   if (!filePath) {
     return res.status(404).send("File not found");
