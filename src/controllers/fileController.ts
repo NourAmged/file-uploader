@@ -35,15 +35,14 @@ async function uploadFile(req: Request, res: Response, next: NextFunction) {
 
 async function downloadFile(req: Request, res: Response, next: NextFunction) {
   const fileId = Number(req.params.fileId);
-  const folderId = Number(req.params.folderId);
-
-  const filePath = await getFilePathById(fileId, folderId);
+  
+  const filePath = await getFilePathById(fileId);
 
   if (!filePath) {
     return res.status(404).send("File not found");
   }
 
-  res.download(filePath.file_path, (err) => {
+  res.download(filePath, (err) => {
     if (err) {
       return next(err);
     }
@@ -51,22 +50,18 @@ async function downloadFile(req: Request, res: Response, next: NextFunction) {
 }
 
 async function deleteFile(req: Request, res: Response, next: NextFunction) {
-  try {
-    const fileId = Number(req.params.fileId);
-    const filePath = await getFilePathById(fileId);
+  const fileId = Number(req.params.fileId);
+  const filePath = await getFilePathById(fileId);
 
-    if (filePath === null) {
-      res.status(404).send("File not found");
-      return;
-    }
-
-    await unlink(filePath.file_path);
-    await deleteFileById(fileId);
-
-    return next();
-  } catch (error) {
-    next(error);
+  if (filePath === null) {
+    res.status(404).send("File not found");
+    return;
   }
+
+  await unlink(filePath);
+  await deleteFileById(fileId);
+
+  return next();
 }
 
 export { uploadFile, upload, downloadFile, deleteFile };

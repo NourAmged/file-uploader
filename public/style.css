@@ -155,7 +155,8 @@ main {
   justify-content: space-between;
   position: relative;
   font-family: 1.2em;
-  width: 200px;
+  min-width: 200px;
+  width: fit-content;
   border: 2px solid grey;
   border-radius: 5px;
   padding: 10px 0 10px 10px;

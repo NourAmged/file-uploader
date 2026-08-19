@@ -85,13 +85,15 @@ async function getFolderById(userId: number, folderId: number | null) {
   return folders;
 }
 
-async function getFilePathById(fileId: number, folderId: number | null = null) {
-  const filePath = await prisma.files.findFirst({
-    where: { AND: [{ id: fileId }, { folderId: folderId }] },
+async function getFilePathById(fileId: number) {
+  const fileInfo = await prisma.files.findUnique({
+    where: { id: fileId },
     select: { file_path: true },
   });
 
-  return filePath;
+  if (!fileInfo) return null;
+
+  return fileInfo.file_path;
 }
 
 async function getUserByFileId(fileId: number) {

@@ -75,7 +75,7 @@
             <p><%=file.file_name%></p>
             <img class="file-btn" src="/dots.svg" alt="dots" />
             <div id="<%=idx%>" class="download-menu" style="display: none;">
-              <p onclick="window.location.href='<%= (locals.folderId) ? `/folder/${folderId}/file/${file.id}` : `/file/${file.id}` %>'" class="download-btn">Download</p>
+              <p onclick="window.location.href='/file/<%=file.id%>'" class="download-btn">Download</p>
               <p onclick="window.location.href='/file/<%=file.id%>/delete'" class="delete-btn">Delete</p>
             </div>
           </div>

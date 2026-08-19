@@ -65,10 +65,8 @@ app.use("/folder/:folderId/", folderRouter);
 
 //download file
 app.use("/file/", fileRouter);
-//download file from folder
-app.use("/folder/", fileRouter);
 //for deletion
-app.use("/file/:fileId", fileRouter);
+app.use("/file/", fileRouter);
 
 app.listen(PORT, () => {
   console.log(`app is running on PORT ${PORT}`);
