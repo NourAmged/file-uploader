@@ -13,7 +13,7 @@ fileRouter.post("/", isLoggedIn, upload.single("file"), uploadFile);
 fileRouter.post("/:folderId", isLoggedIn, upload.single("file"), uploadFile);
 
 fileRouter.get("/:fileId/", isLoggedIn, isAuthorized, downloadFile);
-fileRouter.get("/:fileId/delete", isLoggedIn, isAuthorized, deleteFile);
 
+fileRouter.get("/delete/:fileId/", isLoggedIn, isAuthorized, deleteFile);
 
 export { fileRouter };

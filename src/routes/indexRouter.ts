@@ -7,5 +7,4 @@ const indexRouter = Router();
 indexRouter.get("/", isLoggedIn, homepage);
 indexRouter.get("/:folderId", isLoggedIn, homepage);
 
-
 export { indexRouter };

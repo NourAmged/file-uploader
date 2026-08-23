@@ -1,5 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-import { addFile, deleteFileById, getFilePathById } from "../db/queries.js";
+import {
+  addFile,
+  deleteFileById,
+  getFilePathById,
+} from "../db/queries.js";
 import { unlink } from "node:fs/promises";
 
 import multer from "multer";
@@ -35,7 +39,7 @@ async function uploadFile(req: Request, res: Response, next: NextFunction) {
 
 async function downloadFile(req: Request, res: Response, next: NextFunction) {
   const fileId = Number(req.params.fileId);
-  
+
   const filePath = await getFilePathById(fileId);
 
   if (!filePath) {
@@ -63,5 +67,7 @@ async function deleteFile(req: Request, res: Response, next: NextFunction) {
 
   return next();
 }
+
+
 
 export { uploadFile, upload, downloadFile, deleteFile };

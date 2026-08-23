@@ -1,6 +1,10 @@
 import { validationResult, matchedData } from "express-validator";
 import { Request, Response, NextFunction } from "express";
-import { registerUser, getUserByFileId } from "../db/queries.js";
+import {
+  registerUser,
+  getUserByFileId,
+  getUserByFolderId,
+} from "../db/queries.js";
 import { IVerifyOptions } from "passport-local";
 
 import { passport } from "../config/passport.js";
@@ -90,10 +94,16 @@ async function isLoggedOut(
 
 async function isAuthorized(req: Request, res: Response, next: NextFunction) {
   const fileId = Number(req.params.fileId);
+  const folderId = Number(req.params.folderId);
 
   const currentUser = req.user as { id: number };
+  let userId;
 
-  const userId = await getUserByFileId(fileId);
+  if (!fileId) {
+    userId = await getUserByFolderId(folderId);
+  } else {
+    userId = await getUserByFileId(fileId);
+  }
 
   const currentUserId = currentUser.id;
 

@@ -53,12 +53,12 @@
         <h1>Folders</h1>
         <div class="folders">
           <%locals.folders.forEach((folder,idx) => {%>
-          <div class="folder" onclick="window.location.href='/folder/<%=folder.id%>'">
+          <div class="folder" onclick="(function(e) { e.preventDefault(); e.stopPropagation(); window.location.href='/folder/<%=folder.id%>' })(event)">
             <p><%=folder.folder_name%></p>
             <img class="folder-btn" src="/dots.svg" alt="dots" />
             <div id="<%=idx%>" class="download-menu" style="display: none;">
               <p class="download-btn">Download</p>
-              <p onclick="window.location.href='/folder/<%=folder.id%>/delete'" class="delete-btn">Delete</p>
+              <p onclick="window.location.href='/folder/delete/<%=folder.id%>'" class="delete-btn">Delete</p>
             </div>
           </div>
           <%});%>
@@ -76,7 +76,7 @@
             <img class="file-btn" src="/dots.svg" alt="dots" />
             <div id="<%=idx%>" class="download-menu" style="display: none;">
               <p onclick="window.location.href='/file/<%=file.id%>'" class="download-btn">Download</p>
-              <p onclick="window.location.href='/file/<%=file.id%>/delete'" class="delete-btn">Delete</p>
+              <p onclick="window.location.href='/file/delete/<%=file.id%>'" class="delete-btn">Delete</p>
             </div>
           </div>
           <%});%>

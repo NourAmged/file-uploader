@@ -105,12 +105,31 @@ async function getUserByFileId(fileId: number) {
   return userId;
 }
 
+async function getUserByFolderId(folderId: number) {
+  const userId = await prisma.folders.findUnique({
+    where: { id: folderId },
+    select: { userId: true },
+  });
+
+  return userId;
+}
+
 async function deleteFileById(fileId: number): Promise<void> {
   await prisma.files.delete({
     where: {
       id: fileId,
     },
   });
+}
+
+async function getFilesByFolderId(folderId: number) {
+  const deletedFiles = await prisma.folders.deleteMany({
+    where: {
+      id: folderId,
+    },
+  });
+
+  return deletedFiles;
 }
 
 export {
@@ -124,4 +143,6 @@ export {
   deleteFileById,
   addFolder,
   getFolderById,
+  getUserByFolderId,
+  getFilesByFolderId,
 };

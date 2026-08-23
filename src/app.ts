@@ -52,21 +52,21 @@ app.use(passport.session());
 
 app.use("/login", loginRouter);
 app.use("/sign-up", registerRouter);
-app.use("/logout", logoutRouter);
 
 app.use("/", indexRouter);
 app.use("/folder/", indexRouter);
 
-app.use("/upload-file", fileRouter);
-app.use("/folder/upload-file/", fileRouter);
-
 app.use("/create-folder", folderRouter);
-app.use("/folder/:folderId/", folderRouter);
+app.use("/folder/upload-file/", fileRouter);
+app.use("/folder/delete/", folderRouter);
 
+app.use("/upload-file", fileRouter);
 //download file
 app.use("/file/", fileRouter);
-//for deletion
+//delete file
 app.use("/file/", fileRouter);
+
+app.use("/logout", logoutRouter);
 
 app.listen(PORT, () => {
   console.log(`app is running on PORT ${PORT}`);
