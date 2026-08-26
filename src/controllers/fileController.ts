@@ -68,7 +68,7 @@ async function deleteFile(req: Request, res: Response, next: NextFunction) {
 
   await unlink(filePath);
   await deleteFileById(fileId);
-  if (folderId) return res.redirect(`/folder/${folderId}`);
+  if (folderId?.folderId) return res.redirect(`/folder/${folderId.folderId}`);
   return res.redirect("/");
 }
 
