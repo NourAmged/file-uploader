@@ -156,6 +156,21 @@ async function getFolderIdByFile(fileId: number) {
   return folderId;
 }
 
+async function removeFolder(folderId: number) {
+  await prisma.folders.delete({
+    where: { id: folderId },
+  });
+}
+
+async function parentFolder(folderId: number) {
+  const parentFolderId = await prisma.folders.findUnique({
+    where: { id: folderId },
+    select: { parentId: true },
+  });
+
+  return parentFolderId;
+}
+
 export {
   registerUser,
   getUserByUsername,
@@ -170,4 +185,6 @@ export {
   getUserByFolderId,
   getFilesByFolderId,
   getFolderIdByFile,
+  removeFolder,
+  parentFolder,
 };

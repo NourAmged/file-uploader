@@ -1,5 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import { addFolder, getFilesByFolderId } from "../db/queries.js";
+import {
+  addFolder,
+  getFilesByFolderId,
+  removeFolder,
+  parentFolder,
+} from "../db/queries.js";
+import { unlink } from "node:fs/promises";
 
 async function createFolder(req: Request, res: Response, next: NextFunction) {
   const user = req.user as { id: number };
@@ -17,10 +23,20 @@ async function createFolder(req: Request, res: Response, next: NextFunction) {
 async function deleteFolder(req: Request, res: Response, next: NextFunction) {
   const folderId = Number(req.params.folderId);
 
-  const filesPath = await getFilesByFolderId(folderId);
+  const filePaths = await getFilesByFolderId(folderId);
+  const parentFolderId = await parentFolder(folderId);
 
-  console.log(filesPath);
+  await removeFolder(folderId);
 
+  if (filePaths) {
+    await Promise.all(
+      filePaths.map((file) => {
+        unlink(file.file_path);
+      }),
+    );
+  }
+  if (parentFolderId?.parentId)
+    return res.redirect(`/folder/${parentFolderId.parentId}`);
   return res.redirect("/");
 }
 
