@@ -7,8 +7,8 @@ import { createFolder, deleteFolder } from "../controllers/folderController.js";
 const folderRouter = Router({ mergeParams: true });
 
 folderRouter.post("/", isLoggedIn, createFolder);
-folderRouter.post("/create-folder", isLoggedIn, createFolder);
+folderRouter.post("/:folderId/create-folder", isLoggedIn, createFolder);
 
-folderRouter.get("/:folderId", isLoggedIn, isAuthorized, deleteFolder);
+folderRouter.get("/delete/:folderId", isLoggedIn, isAuthorized, deleteFolder);
 
 export { folderRouter };

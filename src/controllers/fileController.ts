@@ -3,6 +3,7 @@ import {
   addFile,
   deleteFileById,
   getFilePathById,
+  getFolderIdByFile,
 } from "../db/queries.js";
 import { unlink } from "node:fs/promises";
 
@@ -55,7 +56,10 @@ async function downloadFile(req: Request, res: Response, next: NextFunction) {
 
 async function deleteFile(req: Request, res: Response, next: NextFunction) {
   const fileId = Number(req.params.fileId);
+
   const filePath = await getFilePathById(fileId);
+
+  const folderId = await getFolderIdByFile(fileId);
 
   if (filePath === null) {
     res.status(404).send("File not found");
@@ -64,10 +68,8 @@ async function deleteFile(req: Request, res: Response, next: NextFunction) {
 
   await unlink(filePath);
   await deleteFileById(fileId);
-
-  return next();
+  if (folderId) return res.redirect(`/folder/${folderId}`);
+  return res.redirect("/");
 }
-
-
 
 export { uploadFile, upload, downloadFile, deleteFile };

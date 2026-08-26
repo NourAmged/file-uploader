@@ -17,27 +17,11 @@ async function createFolder(req: Request, res: Response, next: NextFunction) {
 async function deleteFolder(req: Request, res: Response, next: NextFunction) {
   const folderId = Number(req.params.folderId);
 
-  
-
   const filesPath = await getFilesByFolderId(folderId);
 
   console.log(filesPath);
-  return;
+
+  return res.redirect("/");
 }
-
-// async function deleteFile(req: Request, res: Response, next: NextFunction) {
-//   const fileId = Number(req.params.fileId);
-//   const filePath = await getFilePathById(fileId);
-
-//   if (filePath === null) {
-//     res.status(404).send("File not found");
-//     return;
-//   }
-
-//   await unlink(filePath);
-//   await deleteFileById(fileId);
-
-//   return next();
-// }
 
 export { createFolder, deleteFolder };

@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { homepage } from "../controllers/pageController.js";
-import { isLoggedIn } from "../controllers/authController.js";
+import { isAuthorized, isLoggedIn } from "../controllers/authController.js";
 
-const indexRouter = Router();
+const indexRouter = Router({ mergeParams: true });
 
 indexRouter.get("/", isLoggedIn, homepage);
-indexRouter.get("/:folderId", isLoggedIn, homepage);
+indexRouter.get("/:folderId", isLoggedIn, isAuthorized, homepage);
 
 export { indexRouter };

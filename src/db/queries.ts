@@ -123,13 +123,37 @@ async function deleteFileById(fileId: number): Promise<void> {
 }
 
 async function getFilesByFolderId(folderId: number) {
-  const deletedFiles = await prisma.folders.deleteMany({
-    where: {
-      id: folderId,
-    },
-  });
+  const filePaths = await prisma.$queryRaw<{ file_path: string }[]>`
+  WITH RECURSIVE folder_tree AS (
+    SELECT
+      id,
+      "parentId"
+    FROM "Folders"
+    WHERE id = ${folderId}
 
-  return deletedFiles;
+    UNION ALL
+
+    SELECT
+      f.id,
+      f."parentId"
+    FROM "Folders" f
+    INNER JOIN folder_tree ft
+      ON f."parentId" = ft.id
+  )
+  SELECT files.file_path
+  FROM "Files" files
+  INNER JOIN folder_tree
+    ON files."folderId" = folder_tree.id;
+`;
+  return filePaths;
+}
+
+async function getFolderIdByFile(fileId: number) {
+  const folderId = prisma.files.findUnique({
+    where: { id: fileId },
+    select: { folderId: true },
+  });
+  return folderId;
 }
 
 export {
@@ -145,4 +169,5 @@ export {
   getFolderById,
   getUserByFolderId,
   getFilesByFolderId,
+  getFolderIdByFile,
 };
