@@ -23,8 +23,8 @@
       <%if(locals.files) {%>
       <div class="main-content-container">
         <h1>Files</h1>
+        <%-include("files", locals.files)%>
       </div>
-      <%-include("files", locals.files)%>
     </div>
     <%}%>
     <%}%>
