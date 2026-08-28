@@ -1,0 +1,12 @@
+<div class="folders">
+  <%locals.folders.forEach((folder,idx) => {%>
+  <div class="folder" onclick="window.location.href='/folder/<%=folder.id%>'">
+    <p><%=folder.folder_name%></p>
+    <img class="folder-btn" src="/dots.svg" alt="dots" />
+    <div id="<%=idx%>" class="download-menu" style="display: none;">
+      <p onclick="(function(e) { e.stopPropagation(); window.location.href='/folder/download/<%=folder.id%>' })(event)" class="download-btn">Download</p>
+      <p onclick="(function(e) { e.stopPropagation(); window.location.href='/folder/delete/<%=folder.id%>' })(event)" class="delete-btn">Delete</p>
+    </div>
+  </div>
+  <%});%>
+</div>

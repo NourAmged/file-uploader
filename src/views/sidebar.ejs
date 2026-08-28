@@ -1,0 +1,33 @@
+<div class="sidebar">
+  <button class="create-btn">New</button>
+  <div class="create-menu" style="display: none;">
+    <form method="POST" action=<%= (locals.folderId) ? `/folder/${folderId}/create-folder` : "/create-folder"%>>
+      <div class="create-folder">
+        <input type="text" name="folder-name" id="folder-name" required placeholder="Folder Name">
+        <button type="submit">Create Folder</button>
+        <% if (locals.errors) { %>
+        <ul class="error-list" style="padding:1rem">
+          <% locals.errors.forEach(function(error) { %>
+          <li><%= error.msg %></li>
+          <% }); %>
+        </ul>
+        <% } %>
+      </div>
+    </form>
+
+    <form method="POST" action=<%= (locals.folderId) ? `/folder/upload-file/${folderId}` : "/upload-file"%> enctype="multipart/form-data">
+      <div class="upload-file">
+        <input type="file" id="file" name="file" required />
+        <button type="submit">Upload File</button>
+        <% if (locals.errors) { %>
+        <ul class="error-list" style="padding:1rem">
+          <% locals.errors.forEach(function(error) { %>
+          <li><%= error.msg %></li>
+          <% }); %>
+        </ul>
+        <% } %>
+      </div>
+    </form>
+  </div>
+  <p class="shared">Shared links</p>
+</div>

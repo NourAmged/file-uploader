@@ -1,0 +1,12 @@
+<div class="files">
+  <%locals.files.forEach((file,idx) => {%>
+  <div class="file">
+    <p><%=file.file_name%></p>
+    <img class="file-btn" src="/dots.svg" alt="dots" />
+    <div id="<%=idx%>" class="download-menu" style="display: none;">
+      <p onclick="window.location.href='/file/<%=file.id%>'" class="download-btn">Download</p>
+      <p onclick="window.location.href='/file/delete/<%=file.id%>'" class="delete-btn">Delete</p>
+    </div>
+  </div>
+  <%});%>
+</div>

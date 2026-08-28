@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+
 import {
   addFolder,
   getFilesByFolderId,
@@ -40,4 +41,23 @@ async function deleteFolder(req: Request, res: Response, next: NextFunction) {
   return res.redirect("/");
 }
 
-export { createFolder, deleteFolder };
+async function downloadFolder(req: Request, res: Response, next: NextFunction) {
+  const folderId = Number(req.params.folderId);
+  const filePaths = await getFilesByFolderId(folderId);
+  const parentFolderId = await parentFolder(folderId);
+
+  if (filePaths.length <= 0) {
+    return res.redirect(`/folder/${folderId}`);
+  }
+
+  const filesToDownload = filePaths.map((file) => {
+    return { path: file.file_path, name: file.file_name };
+  });
+
+
+  if (parentFolderId?.parentId)
+    return res.redirect(`/folder/${parentFolderId.parentId}`);
+  return res.redirect("/");
+}
+
+export { createFolder, deleteFolder, downloadFolder };

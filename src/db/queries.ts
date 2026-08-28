@@ -123,7 +123,9 @@ async function deleteFileById(fileId: number): Promise<void> {
 }
 
 async function getFilesByFolderId(folderId: number) {
-  const filePaths = await prisma.$queryRaw<{ file_path: string }[]>`
+  const filePaths = await prisma.$queryRaw<
+    { file_path: string; file_name: string }[]
+  >`
   WITH RECURSIVE folder_tree AS (
     SELECT
       id,
@@ -140,7 +142,7 @@ async function getFilesByFolderId(folderId: number) {
     INNER JOIN folder_tree ft
       ON f."parentId" = ft.id
   )
-  SELECT files.file_path
+  SELECT files.file_name, files.file_path
   FROM "Files" files
   INNER JOIN folder_tree
     ON files."folderId" = folder_tree.id;

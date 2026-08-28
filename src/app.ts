@@ -58,7 +58,9 @@ app.use("/folder/", indexRouter);
 
 app.use("/create-folder", folderRouter);
 app.use("/folder/upload-file/", fileRouter);
-//deleting folder 
+//downloading folder
+app.use("/folder/", folderRouter);
+//deleting folder
 app.use("/folder/", folderRouter);
 //creating folder inside of folder
 app.use("/folder/", folderRouter);
