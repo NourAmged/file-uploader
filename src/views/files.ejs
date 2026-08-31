@@ -8,5 +8,6 @@
       <p onclick="window.location.href='/file/delete/<%=file.id%>'" class="delete-btn">Delete</p>
     </div>
   </div>
+  <%-include("infocard", {file: file})%>
   <%});%>
 </div>

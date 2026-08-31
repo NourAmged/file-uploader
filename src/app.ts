@@ -54,9 +54,9 @@ app.use("/login", loginRouter);
 app.use("/sign-up", registerRouter);
 
 app.use("/", indexRouter);
-app.use("/folder/", indexRouter);
 
 app.use("/create-folder", folderRouter);
+app.use("/folder/", indexRouter);
 app.use("/folder/upload-file/", fileRouter);
 //downloading folder
 app.use("/folder/", folderRouter);
