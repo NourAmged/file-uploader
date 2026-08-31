@@ -7,7 +7,7 @@
       <p onclick="window.location.href='/file/<%=file.id%>'" class="download-btn">Download</p>
       <p onclick="window.location.href='/file/delete/<%=file.id%>'" class="delete-btn">Delete</p>
     </div>
+    <%-include("infocard", {file: file})%>
   </div>
-  <%-include("infocard", {file: file})%>
   <%});%>
 </div>
