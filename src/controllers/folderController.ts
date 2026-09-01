@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
+import "express-zip";
+
 import {
   addFolder,
   getFilesByFolderId,
@@ -44,7 +46,6 @@ async function deleteFolder(req: Request, res: Response, next: NextFunction) {
 async function downloadFolder(req: Request, res: Response, next: NextFunction) {
   const folderId = Number(req.params.folderId);
   const filePaths = await getFilesByFolderId(folderId);
-  const parentFolderId = await parentFolder(folderId);
 
   if (filePaths.length <= 0) {
     return res.redirect(`/folder/${folderId}`);
@@ -54,10 +55,16 @@ async function downloadFolder(req: Request, res: Response, next: NextFunction) {
     return { path: file.file_path, name: file.file_name };
   });
 
+  res.zip(filesToDownload, "archive.zip", (err) => {
+    if (err) {
+      console.error("Error during zipping process:", err);
+      if (!res.headersSent) {
+        res.status(500).send("Could not generate ZIP file.");
+      }
+    }
+  });
 
-  if (parentFolderId?.parentId)
-    return res.redirect(`/folder/${parentFolderId.parentId}`);
-  return res.redirect("/");
+
 }
 
 export { createFolder, deleteFolder, downloadFolder };
